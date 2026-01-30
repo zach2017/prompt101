@@ -3,175 +3,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prompt Guidelines</title>
+    <title>Prompt Craft — Master AI Prompting</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Outfit', sans-serif; background: #0f0f1a; overflow-x: hidden; }
+        .mono { font-family: 'Space Mono', monospace; }
+        .bg-mesh { position: fixed; inset: 0; z-index: -1; background: radial-gradient(ellipse at 20% 20%, rgba(99,102,241,0.15) 0%, transparent 50%), radial-gradient(ellipse at 80% 80%, rgba(236,72,153,0.1) 0%, transparent 50%), radial-gradient(ellipse at 50% 50%, rgba(34,211,238,0.08) 0%, transparent 60%); animation: meshMove 20s ease-in-out infinite; }
+        @keyframes meshMove { 0%, 100% { transform: scale(1) rotate(0deg); } 50% { transform: scale(1.1) rotate(3deg); } }
+        .grid-overlay { position: fixed; inset: 0; z-index: -1; background-image: linear-gradient(rgba(99,102,241,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(99,102,241,0.03) 1px, transparent 1px); background-size: 60px 60px; }
+        .card { background: linear-gradient(135deg, rgba(26,26,46,0.9) 0%, rgba(26,26,46,0.7) 100%); backdrop-filter: blur(20px); border: 1px solid rgba(99,102,241,0.1); transition: all 0.4s cubic-bezier(0.4,0,0.2,1); }
+        .card:hover { border-color: rgba(99,102,241,0.3); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 60px rgba(99,102,241,0.1); }
+        .btn-primary { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); transition: all 0.3s ease; }
+        .btn-primary:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(99,102,241,0.4); }
+        .btn-outline { border: 1px solid rgba(99,102,241,0.4); transition: all 0.3s ease; }
+        .btn-outline:hover { background: rgba(99,102,241,0.1); border-color: rgba(99,102,241,0.8); }
+        .code-block { background: linear-gradient(135deg, #0d0d1a 0%, #1a1a2e 100%); border: 1px solid rgba(99,102,241,0.2); position: relative; }
+        .detail-panel { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease; opacity: 0; }
+        .detail-panel.open { max-height: 2000px; opacity: 1; }
+        .tag { background: rgba(99,102,241,0.15); border: 1px solid rgba(99,102,241,0.3); }
+        .tool-card { background: linear-gradient(135deg, rgba(26,26,46,0.8) 0%, rgba(37,37,66,0.6) 100%); border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease; }
+        .tool-card:hover { border-color: rgba(99,102,241,0.4); transform: translateY(-2px); }
+        .orb { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.5; animation: float 8s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-20px) scale(1.1); } }
+        .fade-in { animation: fadeIn 0.8s ease forwards; opacity: 0; }
+        @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+        .num-badge { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); box-shadow: 0 4px 15px rgba(99,102,241,0.4); }
+        .divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(99,102,241,0.3), transparent); }
+        ::-webkit-scrollbar { width: 8px; } ::-webkit-scrollbar-track { background: #0f0f1a; } ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #6366f1, #8b5cf6); border-radius: 4px; }
+        .label-bad { color: #f87171; } .label-good { color: #4ade80; } .example-good { border-left: 3px solid #4ade80; }
+    </style>
 </head>
-<body class="bg-gray-50 text-gray-800 min-h-screen">
-    <div class="max-w-3xl mx-auto px-6 py-12">
-        <h1 class="text-3xl font-bold mb-2">Prompt Guidelines</h1>
-        <p class="text-gray-600 mb-8">Tips for writing effective prompts</p>
-
-        <div class="space-y-4">
-
-            <!-- Guideline 1 -->
-            <div class="bg-white rounded-lg border border-gray-200 p-5">
-                <div class="flex items-start gap-3">
-                    <span class="text-blue-500 mt-1">•</span>
-                    <div class="flex-1">
-                        <h2 class="font-semibold">Be clear and specific</h2>
-                        <div id="detail-1" class="hidden mt-3 text-gray-600 text-sm">
-                            <p class="mb-2">State exactly what you want. Vague prompts lead to vague answers.</p>
-                            <div class="bg-gray-50 rounded p-3 mt-2">
-                                <p class="text-xs text-gray-500 mb-1">Instead of:</p>
-                                <p class="text-red-600">"Tell me about dogs"</p>
-                                <p class="text-xs text-gray-500 mt-2 mb-1">Try:</p>
-                                <p class="text-green-600">"List 5 dog breeds suitable for apartments, including their size and energy level"</p>
-                            </div>
-                        </div>
-                        <button onclick="toggle('detail-1', this)" class="text-blue-600 text-sm mt-2 hover:underline">Show details</button>
-                    </div>
-                </div>
+<body class="text-gray-100 min-h-screen">
+    <div class="bg-mesh"></div>
+    <div class="grid-overlay"></div>
+    
+    <header class="relative pt-20 pb-16 px-6">
+        <div class="orb w-64 h-64 bg-indigo-500 -top-20 -left-20"></div>
+        <div class="orb w-48 h-48 bg-pink-500 top-40 right-10" style="animation-delay: -4s;"></div>
+        <div class="max-w-5xl mx-auto text-center relative">
+            <div class="mono text-indigo-400 text-sm tracking-widest mb-4">PROMPT ENGINEERING GUIDE</div>
+            <h1 class="text-5xl md:text-7xl font-bold mb-6"><span class="bg-gradient-to-r from-white via-indigo-200 to-indigo-400 bg-clip-text text-transparent">Prompt Craft</span></h1>
+            <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-10">Master the art of communicating with AI. Write prompts that get results.</p>
+            <div class="flex justify-center gap-4">
+                <a href="#guidelines" class="btn-primary px-8 py-3 rounded-full font-medium">Get Started</a>
+                <a href="#tools" class="btn-outline px-8 py-3 rounded-full font-medium text-gray-300">View Tools</a>
             </div>
-
-            <!-- Guideline 2 -->
-            <div class="bg-white rounded-lg border border-gray-200 p-5">
-                <div class="flex items-start gap-3">
-                    <span class="text-blue-500 mt-1">•</span>
-                    <div class="flex-1">
-                        <h2 class="font-semibold">Provide context</h2>
-                        <div id="detail-2" class="hidden mt-3 text-gray-600 text-sm">
-                            <p class="mb-2">Share relevant background information so the AI understands your situation.</p>
-                            <div class="bg-gray-50 rounded p-3 mt-2">
-                                <p class="text-xs text-gray-500 mb-1">Instead of:</p>
-                                <p class="text-red-600">"Write an email"</p>
-                                <p class="text-xs text-gray-500 mt-2 mb-1">Try:</p>
-                                <p class="text-green-600">"Write a professional email to my manager requesting time off next Friday for a medical appointment"</p>
-                            </div>
-                        </div>
-                        <button onclick="toggle('detail-2', this)" class="text-blue-600 text-sm mt-2 hover:underline">Show details</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Guideline 3 -->
-            <div class="bg-white rounded-lg border border-gray-200 p-5">
-                <div class="flex items-start gap-3">
-                    <span class="text-blue-500 mt-1">•</span>
-                    <div class="flex-1">
-                        <h2 class="font-semibold">Specify the format</h2>
-                        <div id="detail-3" class="hidden mt-3 text-gray-600 text-sm">
-                            <p class="mb-2">Tell the AI how you want the response structured.</p>
-                            <div class="bg-gray-50 rounded p-3 mt-2">
-                                <p class="text-xs text-gray-500 mb-1">Examples:</p>
-                                <ul class="text-green-600 space-y-1">
-                                    <li>"Respond in bullet points"</li>
-                                    <li>"Give me a table with columns for X, Y, Z"</li>
-                                    <li>"Keep it under 100 words"</li>
-                                    <li>"Format as a numbered list"</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <button onclick="toggle('detail-3', this)" class="text-blue-600 text-sm mt-2 hover:underline">Show details</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Guideline 4 -->
-            <div class="bg-white rounded-lg border border-gray-200 p-5">
-                <div class="flex items-start gap-3">
-                    <span class="text-blue-500 mt-1">•</span>
-                    <div class="flex-1">
-                        <h2 class="font-semibold">Use examples</h2>
-                        <div id="detail-4" class="hidden mt-3 text-gray-600 text-sm">
-                            <p class="mb-2">Show what you want by providing examples of good output.</p>
-                            <div class="bg-gray-50 rounded p-3 mt-2">
-                                <p class="text-xs text-gray-500 mb-1">Example prompt:</p>
-                                <p class="text-green-600">"Generate product names like these: 'CloudSync Pro', 'DataFlow Elite', 'SwiftDeploy'. Give me 5 more for a project management tool."</p>
-                            </div>
-                        </div>
-                        <button onclick="toggle('detail-4', this)" class="text-blue-600 text-sm mt-2 hover:underline">Show details</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Guideline 5 -->
-            <div class="bg-white rounded-lg border border-gray-200 p-5">
-                <div class="flex items-start gap-3">
-                    <span class="text-blue-500 mt-1">•</span>
-                    <div class="flex-1">
-                        <h2 class="font-semibold">Break down complex tasks</h2>
-                        <div id="detail-5" class="hidden mt-3 text-gray-600 text-sm">
-                            <p class="mb-2">Split large requests into smaller, manageable steps.</p>
-                            <div class="bg-gray-50 rounded p-3 mt-2">
-                                <p class="text-xs text-gray-500 mb-1">Instead of:</p>
-                                <p class="text-red-600">"Build me a complete marketing strategy"</p>
-                                <p class="text-xs text-gray-500 mt-2 mb-1">Try:</p>
-                                <p class="text-green-600">"Step 1: Identify my target audience for a fitness app aimed at beginners"</p>
-                                <p class="text-green-600 mt-1">"Step 2: Suggest 3 marketing channels for reaching them"</p>
-                            </div>
-                        </div>
-                        <button onclick="toggle('detail-5', this)" class="text-blue-600 text-sm mt-2 hover:underline">Show details</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Guideline 6 -->
-            <div class="bg-white rounded-lg border border-gray-200 p-5">
-                <div class="flex items-start gap-3">
-                    <span class="text-blue-500 mt-1">•</span>
-                    <div class="flex-1">
-                        <h2 class="font-semibold">Assign a role</h2>
-                        <div id="detail-6" class="hidden mt-3 text-gray-600 text-sm">
-                            <p class="mb-2">Give the AI a persona to shape the response style and expertise.</p>
-                            <div class="bg-gray-50 rounded p-3 mt-2">
-                                <p class="text-xs text-gray-500 mb-1">Examples:</p>
-                                <ul class="text-green-600 space-y-1">
-                                    <li>"Act as a senior software engineer reviewing this code"</li>
-                                    <li>"You are a friendly tutor explaining calculus to a high schooler"</li>
-                                    <li>"Respond as a professional copywriter"</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <button onclick="toggle('detail-6', this)" class="text-blue-600 text-sm mt-2 hover:underline">Show details</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Guideline 7 -->
-            <div class="bg-white rounded-lg border border-gray-200 p-5">
-                <div class="flex items-start gap-3">
-                    <span class="text-blue-500 mt-1">•</span>
-                    <div class="flex-1">
-                        <h2 class="font-semibold">Iterate and refine</h2>
-                        <div id="detail-7" class="hidden mt-3 text-gray-600 text-sm">
-                            <p class="mb-2">Don't expect perfection on the first try. Build on responses.</p>
-                            <div class="bg-gray-50 rounded p-3 mt-2">
-                                <p class="text-xs text-gray-500 mb-1">Follow-up examples:</p>
-                                <ul class="text-green-600 space-y-1">
-                                    <li>"Make it more formal"</li>
-                                    <li>"Expand on point 3"</li>
-                                    <li>"Simplify this for a non-technical audience"</li>
-                                    <li>"Add more specific examples"</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <button onclick="toggle('detail-7', this)" class="text-blue-600 text-sm mt-2 hover:underline">Show details</button>
-                    </div>
-                </div>
-            </div>
-
         </div>
+    </header>
 
-        <p class="text-center text-gray-400 text-sm mt-10">Click any "Show details" button for examples</p>
+    <div class="max-w-5xl mx-auto px-6 mb-16">
+        <div class="card rounded-2xl p-6 grid grid-cols-3 gap-6 text-center">
+            <div><div class="text-3xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">9</div><div class="text-gray-500 text-sm mt-1">Core Guidelines</div></div>
+            <div><div class="text-3xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">25+</div><div class="text-gray-500 text-sm mt-1">Examples</div></div>
+            <div><div class="text-3xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">8</div><div class="text-gray-500 text-sm mt-1">AI Tools</div></div>
+        </div>
     </div>
 
-    <script>
-        function toggle(id, btn) {
-            const el = document.getElementById(id);
-            const isHidden = el.classList.contains('hidden');
-            el.classList.toggle('hidden');
-            btn.textContent = isHidden ? 'Hide details' : 'Show details';
-        }
-    </script>
+    <section id="guidelines" class="max-w-5xl mx-auto px-6 pb-20">
+        <div class="flex items-center gap-4 mb-10">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+            <div><h2 class="text-2xl font-bold">Prompting Guidelines</h2><p class="text-gray-500">Essential techniques for effective AI communication</p></div>
+        </div>
+        <div class="space-y-4" id="guidelines-container"></div>
+    </section>
+
+    <section id="tools" class="max-w-5xl mx-auto px-6 pb-20">
+        <div class="divider mb-16"></div>
+        <div class="flex items-center gap-4 mb-10">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg></div>
+            <div><h2 class="text-2xl font-bold">AI Tools & Platforms</h2><p class="text-gray-500">Popular tools to practice your prompting skills</p></div>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4" id="tools-container"></div>
+    </section>
+
+    <section class="max-w-5xl mx-auto px-6 pb-20">
+        <div class="divider mb-16"></div>
+        <div class="flex items-center gap-4 mb-10">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div>
+            <div><h2 class="text-2xl font-bold">Quick Reference Templates</h2><p class="text-gray-500">Copy-paste templates to get started</p></div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-4" id="templates-container"></div>
+    </section>
+
+    <footer class="max-w-5xl mx-auto px-6 pb-12">
+        <div class="divider mb-8"></div>
+        <div class="text-center text-gray-500 text-sm"><p>Built to help you write better prompts • Start experimenting!</p></div>
+    </footer>
+
+<script>
+const guidelines = [
+    { title: "Be Clear and Specific", desc: "State exactly what you want. Vague prompts lead to vague answers.", tags: ["Clarity", "Precision", "Details"], examples: [
+        { bad: "Tell me about dogs", good: "List 5 dog breeds for apartments under 800 sq ft with size, energy level, and grooming needs" },
+        { bad: "Write some code", good: "Write a Python function that finds two numbers summing to a target. Include error handling and type hints." },
+        { good: "Create a meal plan: $50/week budget, vegetarian, 30 min max cooking, US grocery store. Include breakfast, lunch, dinner for 5 weekdays." }
+    ]},
+    { title: "Provide Context", desc: "Share background info, your situation, audience, and goals.", tags: ["Background", "Audience", "Goals"], examples: [
+        { bad: "Write an email", good: "Write a professional email to my manager requesting Friday off for a medical appointment. I've been here 2 years with a good relationship." },
+        { bad: "Explain machine learning", good: "Explain ML to a marketing manager for a product launch. No technical background but very smart." },
+        { good: "I'm a freelance designer pitching to a fintech startup valuing innovation and minimalism. Help write a proposal intro positioning my 5 years experience." }
+    ]},
+    { title: "Specify the Format", desc: "Tell the AI how to structure responses: lists, tables, JSON, etc.", tags: ["Structure", "Length", "Style"], examples: [
+        { good: "Give me 5 bullet points summarizing key benefits" },
+        { good: "Create a comparison table with columns for Price, Features, Pros/Cons" },
+        { good: "Return as JSON with keys: name, price, category, inStock (boolean)" },
+        { good: "Keep it under 100 words" }
+    ]},
+    { title: "Use Examples (Few-Shot)", desc: "Show what you want by providing sample outputs. One of the most powerful techniques.", tags: ["Few-Shot", "Templates", "Patterns"], examples: [
+        { good: "Generate product names like: CloudSync Pro, DataFlow Elite, SwiftDeploy. Give me 5 more for a project management tool." },
+        { good: "Write captions like: 'Monday called. We hung up. ☕️ #MondayMood' — Now write 3 for a coffee brand targeting millennials." },
+        { good: "Convert: 'Meeting tomorrow 3pm' → { event: 'meeting', date: 'tomorrow', time: '15:00' }. Now convert: 'Lunch with Sarah Friday noon'" }
+    ]},
+    { title: "Assign a Role or Persona", desc: "Give the AI a specific perspective to shape response style and expertise.", tags: ["Persona", "Expertise", "Perspective"], examples: [
+        { good: "Act as a senior software engineer with 15 years experience. Review this code for security and performance issues." },
+        { good: "You are a patient math tutor helping a struggling 8th grader. Explain quadratic equations step by step." },
+        { good: "Play devil's advocate for my business idea. Poke holes in my plan and identify risks I missed." }
+    ]},
+    { title: "Break Down Complex Tasks", desc: "Split large requests into smaller, manageable steps.", tags: ["Chunking", "Steps", "Workflow"], examples: [
+        { bad: "Create a complete marketing strategy", good: "Step 1: Identify target audience for a fitness app for busy professionals. [Then] Step 2: Suggest 3 marketing channels." },
+        { good: "Let's write a blog post: 1) Give me 5 title options about productivity 2) I'll pick one, then create outline 3) Write intro 4) Continue section by section" }
+    ]},
+    { title: "Request Chain-of-Thought", desc: "Ask the AI to show its work and think step-by-step for complex reasoning.", tags: ["Reasoning", "Step-by-Step", "Logic"], examples: [
+        { good: "Solve this and show your work: A train travels 120 miles in 2 hours, stops 30 min, then 90 miles in 1.5 hours. What's average speed for entire journey?" },
+        { good: "Before answering, think through pros and cons of each option. Then explain your recommendation and why." },
+        { good: "Analyze this decision: 1) Key factors 2) Arguments for Option A 3) Arguments for Option B 4) Recommendation with reasoning" }
+    ]},
+    { title: "Iterate and Refine", desc: "Don't expect perfection first try. Build on responses and guide the AI.", tags: ["Feedback", "Revisions", "Refinement"], examples: [
+        { good: "Make it more casual and friendly" },
+        { good: "Expand on point 3 with specific examples" },
+        { good: "Rewrite for a non-technical audience" },
+        { good: "Combine version 1's intro with version 2's conclusion, shorten middle by half" }
+    ]},
+    { title: "Set Constraints", desc: "Define what to include, exclude, or avoid. Constraints often improve output.", tags: ["Limits", "Focus", "Exclusions"], examples: [
+        { good: "Write taglines for a law firm. Avoid clichés like 'fighting for you' or 'justice served.' No puns." },
+        { good: "Summarize in exactly 50 words. Every word counts." },
+        { good: "Product description: under 100 words, no superlatives (best/greatest), exactly one customer quote, ends with clear CTA" }
+    ]}
+];
+
+const tools = [
+    { name: "Claude", desc: "Anthropic's helpful AI assistant", url: "https://claude.ai", color: "from-orange-400 to-amber-600", letter: "C" },
+    { name: "ChatGPT", desc: "OpenAI's conversational AI", url: "https://chat.openai.com", color: "from-emerald-400 to-teal-600", letter: "G" },
+    { name: "Gemini", desc: "Google's multimodal AI", url: "https://gemini.google.com", color: "from-blue-400 to-indigo-600", letter: "G" },
+    { name: "Perplexity", desc: "AI-powered search engine", url: "https://perplexity.ai", color: "from-cyan-400 to-sky-600", letter: "P" },
+    { name: "Midjourney", desc: "AI image generation", url: "https://midjourney.com", color: "from-violet-400 to-purple-600", letter: "M" },
+    { name: "Stable Diffusion", desc: "Open-source image AI", url: "https://stability.ai", color: "from-rose-400 to-pink-600", letter: "S" },
+    { name: "GitHub Copilot", desc: "AI pair programmer", url: "https://github.com/features/copilot", color: "from-gray-500 to-gray-700", letter: "⌨" },
+    { name: "Notion AI", desc: "AI writing in workspace", url: "https://notion.so/product/ai", color: "from-neutral-300 to-neutral-500", letter: "N" }
+];
+
+const templates = [
+    { title: "🎯 General Purpose", content: "I need help with [TASK].\n\nContext: [BACKGROUND]\nAudience: [WHO IS THIS FOR]\nFormat: [HOW YOU WANT IT]\nConstraints: [LIMITS]" },
+    { title: "✍️ Writing", content: "Write a [TYPE] about [TOPIC].\n\nTone: [FORMAL/CASUAL]\nLength: [WORD COUNT]\nInclude: [KEY POINTS]\nAvoid: [WHAT NOT TO DO]" },
+    { title: "💻 Coding", content: "Write [LANGUAGE] code that [FUNCTION].\n\nInput: [WHAT IT RECEIVES]\nOutput: [WHAT IT RETURNS]\nInclude: error handling, comments\nAdd tests if needed." },
+    { title: "🔍 Analysis", content: "Analyze [SUBJECT] and provide:\n\n1. Key findings (top 3-5)\n2. Strengths and weaknesses\n3. Recommendations\n\nThink step-by-step." }
+];
+
+function renderGuidelines() {
+    const container = document.getElementById('guidelines-container');
+    guidelines.forEach((g, i) => {
+        const examples = g.examples.map(ex => {
+            if (ex.bad) return `<div class="grid md:grid-cols-2 gap-4"><div class="code-block rounded-xl p-4"><div class="label-bad text-xs font-medium mb-2 mono">✗ VAGUE</div><p class="text-gray-300">"${ex.bad}"</p></div><div class="code-block rounded-xl p-4 example-good"><div class="label-good text-xs font-medium mb-2 mono">✓ BETTER</div><p class="text-gray-300">"${ex.good}"</p></div></div>`;
+            return `<div class="code-block rounded-xl p-4 example-good"><div class="label-good text-xs font-medium mb-2 mono">✓ EXAMPLE</div><p class="text-gray-300">"${ex.good}"</p></div>`;
+        }).join('');
+        container.innerHTML += `<div class="card rounded-2xl overflow-hidden"><div class="p-6"><div class="flex items-start gap-4"><div class="num-badge w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm shrink-0">0${i+1}</div><div class="flex-1"><h3 class="text-xl font-semibold mb-2">${g.title}</h3><p class="text-gray-400">${g.desc}</p><div class="flex flex-wrap gap-2 mt-4">${g.tags.map(t=>`<span class="tag px-3 py-1 rounded-full text-xs text-indigo-300">${t}</span>`).join('')}</div></div><button onclick="toggleDetail(${i})" class="btn-outline px-4 py-2 rounded-lg text-sm text-gray-300 shrink-0"><span id="btn-text-${i}">Show Examples</span></button></div></div><div id="detail-${i}" class="detail-panel"><div class="divider"></div><div class="p-6 space-y-4">${examples}</div></div></div>`;
+    });
+}
+
+function renderTools() {
+    const container = document.getElementById('tools-container');
+    tools.forEach(t => {
+        container.innerHTML += `<a href="${t.url}" target="_blank" class="tool-card rounded-xl p-5 block"><div class="w-10 h-10 rounded-lg bg-gradient-to-br ${t.color} flex items-center justify-center mb-4 text-lg font-bold">${t.letter}</div><h3 class="font-semibold mb-1">${t.name}</h3><p class="text-gray-500 text-sm">${t.desc}</p><div class="mt-3 text-indigo-400 text-xs">${t.url.replace('https://','').split('/')[0]} →</div></a>`;
+    });
+}
+
+function renderTemplates() {
+    const container = document.getElementById('templates-container');
+    templates.forEach(t => {
+        container.innerHTML += `<div class="card rounded-xl p-5"><h3 class="font-semibold mb-3 text-indigo-300">${t.title}</h3><div class="code-block rounded-lg p-4 text-sm text-gray-300 mono whitespace-pre-line">${t.content}</div></div>`;
+    });
+}
+
+function toggleDetail(id) {
+    const panel = document.getElementById(`detail-${id}`);
+    const btnText = document.getElementById(`btn-text-${id}`);
+    const isOpen = panel.classList.contains('open');
+    document.querySelectorAll('.detail-panel').forEach(p => p.classList.remove('open'));
+    document.querySelectorAll('[id^="btn-text-"]').forEach(b => b.textContent = 'Show Examples');
+    if (!isOpen) { panel.classList.add('open'); btnText.textContent = 'Hide Examples'; }
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); document.querySelector(a.getAttribute('href')).scrollIntoView({ behavior: 'smooth' }); }));
+
+renderGuidelines(); renderTools(); renderTemplates();
+</script>
 </body>
 </html>
