@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Guidelines</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 min-h-screen">
+    <div class="max-w-3xl mx-auto px-6 py-12">
+        <h1 class="text-3xl font-bold mb-2">Prompt Guidelines</h1>
+        <p class="text-gray-600 mb-8">Tips for writing effective prompts</p>
+
+        <div class="space-y-4">
+
+            <!-- Guideline 1 -->
+            <div class="bg-white rounded-lg border border-gray-200 p-5">
+                <div class="flex items-start gap-3">
+                    <span class="text-blue-500 mt-1">•</span>
+                    <div class="flex-1">
+                        <h2 class="font-semibold">Be clear and specific</h2>
+                        <div id="detail-1" class="hidden mt-3 text-gray-600 text-sm">
+                            <p class="mb-2">State exactly what you want. Vague prompts lead to vague answers.</p>
+                            <div class="bg-gray-50 rounded p-3 mt-2">
+                                <p class="text-xs text-gray-500 mb-1">Instead of:</p>
+                                <p class="text-red-600">"Tell me about dogs"</p>
+                                <p class="text-xs text-gray-500 mt-2 mb-1">Try:</p>
+                                <p class="text-green-600">"List 5 dog breeds suitable for apartments, including their size and energy level"</p>
+                            </div>
+                        </div>
+                        <button onclick="toggle('detail-1', this)" class="text-blue-600 text-sm mt-2 hover:underline">Show details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Guideline 2 -->
+            <div class="bg-white rounded-lg border border-gray-200 p-5">
+                <div class="flex items-start gap-3">
+                    <span class="text-blue-500 mt-1">•</span>
+                    <div class="flex-1">
+                        <h2 class="font-semibold">Provide context</h2>
+                        <div id="detail-2" class="hidden mt-3 text-gray-600 text-sm">
+                            <p class="mb-2">Share relevant background information so the AI understands your situation.</p>
+                            <div class="bg-gray-50 rounded p-3 mt-2">
+                                <p class="text-xs text-gray-500 mb-1">Instead of:</p>
+                                <p class="text-red-600">"Write an email"</p>
+                                <p class="text-xs text-gray-500 mt-2 mb-1">Try:</p>
+                                <p class="text-green-600">"Write a professional email to my manager requesting time off next Friday for a medical appointment"</p>
+                            </div>
+                        </div>
+                        <button onclick="toggle('detail-2', this)" class="text-blue-600 text-sm mt-2 hover:underline">Show details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Guideline 3 -->
+            <div class="bg-white rounded-lg border border-gray-200 p-5">
+                <div class="flex items-start gap-3">
+                    <span class="text-blue-500 mt-1">•</span>
+                    <div class="flex-1">
+                        <h2 class="font-semibold">Specify the format</h2>
+                        <div id="detail-3" class="hidden mt-3 text-gray-600 text-sm">
+                            <p class="mb-2">Tell the AI how you want the response structured.</p>
+                            <div class="bg-gray-50 rounded p-3 mt-2">
+                                <p class="text-xs text-gray-500 mb-1">Examples:</p>
+                                <ul class="text-green-600 space-y-1">
+                                    <li>"Respond in bullet points"</li>
+                                    <li>"Give me a table with columns for X, Y, Z"</li>
+                                    <li>"Keep it under 100 words"</li>
+                                    <li>"Format as a numbered list"</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <button onclick="toggle('detail-3', this)" class="text-blue-600 text-sm mt-2 hover:underline">Show details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Guideline 4 -->
+            <div class="bg-white rounded-lg border border-gray-200 p-5">
+                <div class="flex items-start gap-3">
+                    <span class="text-blue-500 mt-1">•</span>
+                    <div class="flex-1">
+                        <h2 class="font-semibold">Use examples</h2>
+                        <div id="detail-4" class="hidden mt-3 text-gray-600 text-sm">
+                            <p class="mb-2">Show what you want by providing examples of good output.</p>
+                            <div class="bg-gray-50 rounded p-3 mt-2">
+                                <p class="text-xs text-gray-500 mb-1">Example prompt:</p>
+                                <p class="text-green-600">"Generate product names like these: 'CloudSync Pro', 'DataFlow Elite', 'SwiftDeploy'. Give me 5 more for a project management tool."</p>
+                            </div>
+                        </div>
+                        <button onclick="toggle('detail-4', this)" class="text-blue-600 text-sm mt-2 hover:underline">Show details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Guideline 5 -->
+            <div class="bg-white rounded-lg border border-gray-200 p-5">
+                <div class="flex items-start gap-3">
+                    <span class="text-blue-500 mt-1">•</span>
+                    <div class="flex-1">
+                        <h2 class="font-semibold">Break down complex tasks</h2>
+                        <div id="detail-5" class="hidden mt-3 text-gray-600 text-sm">
+                            <p class="mb-2">Split large requests into smaller, manageable steps.</p>
+                            <div class="bg-gray-50 rounded p-3 mt-2">
+                                <p class="text-xs text-gray-500 mb-1">Instead of:</p>
+                                <p class="text-red-600">"Build me a complete marketing strategy"</p>
+                                <p class="text-xs text-gray-500 mt-2 mb-1">Try:</p>
+                                <p class="text-green-600">"Step 1: Identify my target audience for a fitness app aimed at beginners"</p>
+                                <p class="text-green-600 mt-1">"Step 2: Suggest 3 marketing channels for reaching them"</p>
+                            </div>
+                        </div>
+                        <button onclick="toggle('detail-5', this)" class="text-blue-600 text-sm mt-2 hover:underline">Show details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Guideline 6 -->
+            <div class="bg-white rounded-lg border border-gray-200 p-5">
+                <div class="flex items-start gap-3">
+                    <span class="text-blue-500 mt-1">•</span>
+                    <div class="flex-1">
+                        <h2 class="font-semibold">Assign a role</h2>
+                        <div id="detail-6" class="hidden mt-3 text-gray-600 text-sm">
+                            <p class="mb-2">Give the AI a persona to shape the response style and expertise.</p>
+                            <div class="bg-gray-50 rounded p-3 mt-2">
+                                <p class="text-xs text-gray-500 mb-1">Examples:</p>
+                                <ul class="text-green-600 space-y-1">
+                                    <li>"Act as a senior software engineer reviewing this code"</li>
+                                    <li>"You are a friendly tutor explaining calculus to a high schooler"</li>
+                                    <li>"Respond as a professional copywriter"</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <button onclick="toggle('detail-6', this)" class="text-blue-600 text-sm mt-2 hover:underline">Show details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Guideline 7 -->
+            <div class="bg-white rounded-lg border border-gray-200 p-5">
+                <div class="flex items-start gap-3">
+                    <span class="text-blue-500 mt-1">•</span>
+                    <div class="flex-1">
+                        <h2 class="font-semibold">Iterate and refine</h2>
+                        <div id="detail-7" class="hidden mt-3 text-gray-600 text-sm">
+                            <p class="mb-2">Don't expect perfection on the first try. Build on responses.</p>
+                            <div class="bg-gray-50 rounded p-3 mt-2">
+                                <p class="text-xs text-gray-500 mb-1">Follow-up examples:</p>
+                                <ul class="text-green-600 space-y-1">
+                                    <li>"Make it more formal"</li>
+                                    <li>"Expand on point 3"</li>
+                                    <li>"Simplify this for a non-technical audience"</li>
+                                    <li>"Add more specific examples"</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <button onclick="toggle('detail-7', this)" class="text-blue-600 text-sm mt-2 hover:underline">Show details</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <p class="text-center text-gray-400 text-sm mt-10">Click any "Show details" button for examples</p>
+    </div>
+
+    <script>
+        function toggle(id, btn) {
+            const el = document.getElementById(id);
+            const isHidden = el.classList.contains('hidden');
+            el.classList.toggle('hidden');
+            btn.textContent = isHidden ? 'Hide details' : 'Show details';
+        }
+    </script>
+</body>
+</html>
